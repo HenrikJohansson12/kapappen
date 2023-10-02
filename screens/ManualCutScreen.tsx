@@ -4,37 +4,19 @@ import MeasurementInput from "../components/MeasurementInput";
 import AvailableLengthsInput from "../components/AvailableLengthsInput";
 import { MaterialIcons } from "@expo/vector-icons";
 import CutList from "../components/CutList";
-import ProductSelector from "../components/ProductSelector";
 
 //Denna skärmen ska hålla data från byggvaruhusen
 
-const CutScreen = () => {
+const ManualCutScreen = () => {
   const [addCutItemsVisible, setAddCutItemsVisible] = useState(false);
   const [addLengthsVisible, SetAddLengthsVisible] = useState(false);
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-            <View>
-        <Button
-          title="Välj produkt"
-          onPress={() => SetAddLengthsVisible(true)}
-        ></Button>
-        <Modal visible={addLengthsVisible}>
-          <MaterialIcons
-            name="close"
-            size={24}
-            color="black"
-            onPress={() => SetAddLengthsVisible(false)}
-          />
-          <View style={styles.modalView}>
-            <ProductSelector/>
-          </View>
-        </Modal>
-      </View>
       <View>
-        <Text> Välj produkt </Text>
+        <Text> Välj längd </Text>
         <Button
-          title="Lägg till dina mått"
+          title="Lägg till egna längder"
           onPress={() => setAddCutItemsVisible(true)}
         />
         <Modal visible={addCutItemsVisible}>
@@ -49,7 +31,23 @@ const CutScreen = () => {
           </View>
         </Modal>
       </View>
-
+      <View>
+        <Button
+          title="Lägg till längder"
+          onPress={() => SetAddLengthsVisible(true)}
+        ></Button>
+        <Modal visible={addLengthsVisible}>
+          <MaterialIcons
+            name="close"
+            size={24}
+            color="black"
+            onPress={() => SetAddLengthsVisible(false)}
+          />
+          <View style={styles.modalView}>
+            <AvailableLengthsInput />
+          </View>
+        </Modal>
+      </View>
       <CutList/>
     </View>
   );
@@ -99,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CutScreen;
+export default ManualCutScreen;
