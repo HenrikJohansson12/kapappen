@@ -5,12 +5,13 @@ import AvailableLengthsInput from "../components/AvailableLengthsInput";
 import { MaterialIcons } from "@expo/vector-icons";
 import CutList from "../components/CutList";
 import ProductSelector from "../components/ProductSelector";
-
+import { useSelectedProductContext } from "../contexts/SelectedProductContext";
 //Denna skärmen ska hålla data från byggvaruhusen
 
 const CutScreen = () => {
   const [addCutItemsVisible, setAddCutItemsVisible] = useState(false);
   const [addLengthsVisible, SetAddLengthsVisible] = useState(false);
+  const  {selectedProduct} = useSelectedProductContext();
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -20,14 +21,15 @@ const CutScreen = () => {
           onPress={() => SetAddLengthsVisible(true)}
         ></Button>
         <Modal visible={addLengthsVisible}>
-          <MaterialIcons
+         
+          <View style={styles.modalView}>
+            <ProductSelector/>
+            <MaterialIcons
             name="close"
             size={24}
             color="black"
             onPress={() => SetAddLengthsVisible(false)}
           />
-          <View style={styles.modalView}>
-            <ProductSelector/>
           </View>
         </Modal>
       </View>
@@ -51,6 +53,7 @@ const CutScreen = () => {
       </View>
 
       <CutList/>
+      <Text> {selectedProduct?.type} {selectedProduct?.thickness}x{selectedProduct?.width}</Text>
     </View>
   );
 };

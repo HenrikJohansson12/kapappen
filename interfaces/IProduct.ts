@@ -1,4 +1,4 @@
-interface Product {
+ interface Product {
     id: number;
     type: string;
     thickness: number;

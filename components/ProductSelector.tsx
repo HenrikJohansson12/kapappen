@@ -8,19 +8,13 @@ import {
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
+import { useSelectedProductContext } from "../contexts/SelectedProductContext";
 
-interface Product {
-  id: number;
-  type: string;
-  thickness: number;
-  width: number;
-  isPressureTreated: boolean;
-}
 
 const ProductSelector = () => {
   const [data, setData] = useState<Product[]>([]);
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState(true);
+  const {selectedProduct,setSelectedProduct} = useSelectedProductContext();
+    const [loading, setLoading] = useState(true);
   // Måste använda 10.0.2.2 för att emulatorn ska fungera
   const url = "http://10.0.2.2:5298/Product";
 
