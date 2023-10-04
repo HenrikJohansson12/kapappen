@@ -1,23 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Modal, StyleSheet, Button } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import CutList from "../components/CutList";
 import ProductSelector from "../components/ProductSelector";
 import { useSelectedProductContext } from "../contexts/SelectedProductContext";
-
 import CutItemInput from "../components/MeasurementInput";
 import { useCutItemContext } from "../contexts/CutItemsContext";
+import * as SQLite from 'expo-sqlite';
 
 const CutScreen = () => {
   const [addCutItemsVisible, setAddCutItemsVisible] = useState(false);
   const [addLengthsVisible, setAddLengthsVisible] = useState(false);
   const { selectedProduct } = useSelectedProductContext();
-  const { cutItems } = useCutItemContext(); // Hämta cutItems från kontexten
+  const { cutItems } = useCutItemContext();
   const [cutItemsWithProduct, setCutItemsWithProduct] = useState<ICutItemWithProduct[]>([]);
+
+  const db = SQLite.openDatabase('mydatabase.db');
 
   const combineCutItemsWithProduct = (cutItems: ICutItem[]): ICutItemWithProduct[] => {
     if (!selectedProduct) {
-      return []; // Om selectedProduct är null eller undefined, returnera en tom lista
+      return [];
     }
 
     return cutItems.map((cutItem) => ({
@@ -27,11 +29,31 @@ const CutScreen = () => {
     }));
   };
 
-  const handleGoToShoppingList = () => {
-  
+  const handleGoToShoppingList = async () => {
     const cutItemsWithProductResult: ICutItemWithProduct[] = combineCutItemsWithProduct(cutItems);
     setCutItemsWithProduct(cutItemsWithProductResult);
+
+    try {
+      await db.transactionAsync(async (tx) => {
+        await tx.executeSqlAsync(
+          'CREATE TABLE IF NOT EXISTS CutItemsWithProduct (id INTEGER PRIMARY KEY AUTOINCREMENT, measurement REAL, amount INTEGER, productId INTEGER, type TEXT, thickness REAL, width REAL)'
+        );
+
+        for (const item of cutItemsWithProductResult) {
+          const { measurement, amount, product } = item;
+          await tx.executeSqlAsync(
+            'INSERT INTO CutItemsWithProduct (measurement, amount, productId, type, thickness, width) VALUES (?, ?, ?, ?, ?, ?)',
+            [measurement, amount, product.id, product.type, product.thickness, product.width]
+          );
+        }
+      });
+      console.log('All data has been saved in the database');
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
   };
+  
+    
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
