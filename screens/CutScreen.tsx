@@ -7,6 +7,7 @@ import { useSelectedProductContext } from "../contexts/SelectedProductContext";
 import CutItemInput from "../components/MeasurementInput";
 import { useCutItemContext } from "../contexts/CutItemsContext";
 import * as SQLite from 'expo-sqlite';
+import { useSQLiteData } from "../contexts/SqLiteDataContext";
 
 const CutScreen = () => {
   const [addCutItemsVisible, setAddCutItemsVisible] = useState(false);
@@ -14,6 +15,7 @@ const CutScreen = () => {
   const { selectedProduct } = useSelectedProductContext();
   const { cutItems } = useCutItemContext();
   const [cutItemsWithProduct, setCutItemsWithProduct] = useState<ICutItemWithProduct[]>([]);
+  const { updateData } = useSQLiteData();
 
   const db = SQLite.openDatabase('mydatabase.db');
 
@@ -47,7 +49,7 @@ const CutScreen = () => {
           );
         }
       });
-      console.log('All data has been saved in the database');
+      updateData();
     } catch (error) {
       console.error('An error occurred:', error);
     }
@@ -76,7 +78,6 @@ const CutScreen = () => {
         </Modal>
       </View>
       <View>
-        <Text> Välj produkt </Text>
         <Button
           title="Lägg till dina mått"
           onPress={() => setAddCutItemsVisible(true)}
@@ -96,7 +97,7 @@ const CutScreen = () => {
 
       <CutList/>
       <Text> {selectedProduct?.type} {selectedProduct?.thickness}x{selectedProduct?.width}</Text>
-      <Button title="Gå vidare till inköpslista" onPress={handleGoToShoppingList}/>
+      <Button title="Spara till inköpslista" onPress={handleGoToShoppingList}/>
 
 
      <Text>

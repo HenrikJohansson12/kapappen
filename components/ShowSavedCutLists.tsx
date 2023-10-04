@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import * as SQLite from 'expo-sqlite';
-
-const SQLiteDataFetcher: React.FC = () => {
+import { useSQLiteData } from '../contexts/SqLiteDataContext';
+const ShowSavedCutList: React.FC = () => {
   const [cutItemsWithProduct, setCutItemsWithProduct] = useState<ICutItemWithProduct[]>([]);
   const db = SQLite.openDatabase('mydatabase.db');
+  const {dataUpdated} = useSQLiteData();
 
-  const fetchCutItemsWithProductData = async () => {
+   const fetchCutItemsWithProductData = async () => {
     return new Promise<ICutItemWithProduct[]>((resolve, reject) => {
       try {
         db.transactionAsync(async (tx) => {
@@ -46,17 +47,14 @@ const SQLiteDataFetcher: React.FC = () => {
   };
 
   useEffect(() => {
-    const getCutItemsWithProductData = async () => {
-      try {
-        const cutItemsData = await fetchCutItemsWithProductData();
-        setCutItemsWithProduct(cutItemsData);
-      } catch (error) {
-        console.error('Fel vid hämtning av CutItemsWithProduct-data:', error);
-      }
+    const fetchData = async () => {
+      const cutItemsData = await fetchCutItemsWithProductData();
+      setCutItemsWithProduct(cutItemsData);
     };
-
-    getCutItemsWithProductData();
-  }, []);
+  
+    fetchData();
+  }, [dataUpdated]);
+  
 
   return (
     <View>
@@ -70,4 +68,4 @@ const SQLiteDataFetcher: React.FC = () => {
   );
 };
 
-export default SQLiteDataFetcher;
+export default ShowSavedCutList;

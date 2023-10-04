@@ -7,11 +7,13 @@ import { CutItemProvider } from "./contexts/CutItemsContext";
 import { AvailableLengthsProvider } from "./contexts/AvailableLengthsContext";
 import { SelectedProductProvider } from "./contexts/SelectedProductContext";
 import * as SQLite from 'expo-sqlite';
+import { SQLiteDataProvider } from "./contexts/SqLiteDataContext";
 
 export default function App() {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
+        <SQLiteDataProvider>
         <SelectedProductProvider>
         <AvailableLengthsProvider>
         <CutItemProvider>
@@ -20,6 +22,7 @@ export default function App() {
           </CutItemProvider>
           </AvailableLengthsProvider>
           </SelectedProductProvider>
+          </SQLiteDataProvider>
       </NavigationContainer>
     </SafeAreaProvider>
   );
