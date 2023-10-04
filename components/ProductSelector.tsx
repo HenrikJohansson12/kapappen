@@ -14,7 +14,7 @@ import { useSelectedProductContext } from "../contexts/SelectedProductContext";
 const ProductSelector = () => {
   const [data, setData] = useState<Product[]>([]);
   const {selectedProduct,setSelectedProduct} = useSelectedProductContext();
-    const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   // Måste använda 10.0.2.2 för att emulatorn ska fungera
   const url = "http://10.0.2.2:5298/Product";
 

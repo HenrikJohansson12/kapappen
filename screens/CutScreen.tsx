@@ -1,24 +1,44 @@
 import React, { useState } from "react";
 import { View, Text, Modal, StyleSheet, Button } from "react-native";
-import MeasurementInput from "../components/MeasurementInput";
-import AvailableLengthsInput from "../components/AvailableLengthsInput";
 import { MaterialIcons } from "@expo/vector-icons";
 import CutList from "../components/CutList";
 import ProductSelector from "../components/ProductSelector";
 import { useSelectedProductContext } from "../contexts/SelectedProductContext";
-//Denna skärmen ska hålla data från byggvaruhusen
+
+import CutItemInput from "../components/MeasurementInput";
+import { useCutItemContext } from "../contexts/CutItemsContext";
 
 const CutScreen = () => {
   const [addCutItemsVisible, setAddCutItemsVisible] = useState(false);
-  const [addLengthsVisible, SetAddLengthsVisible] = useState(false);
-  const  {selectedProduct} = useSelectedProductContext();
+  const [addLengthsVisible, setAddLengthsVisible] = useState(false);
+  const { selectedProduct } = useSelectedProductContext();
+  const { cutItems } = useCutItemContext(); // Hämta cutItems från kontexten
+  const [cutItemsWithProduct, setCutItemsWithProduct] = useState<ICutItemWithProduct[]>([]);
+
+  const combineCutItemsWithProduct = (cutItems: ICutItem[]): ICutItemWithProduct[] => {
+    if (!selectedProduct) {
+      return []; // Om selectedProduct är null eller undefined, returnera en tom lista
+    }
+
+    return cutItems.map((cutItem) => ({
+      measurement: cutItem.measurement,
+      amount: cutItem.amount,
+      product: selectedProduct,
+    }));
+  };
+
+  const handleGoToShoppingList = () => {
+  
+    const cutItemsWithProductResult: ICutItemWithProduct[] = combineCutItemsWithProduct(cutItems);
+    setCutItemsWithProduct(cutItemsWithProductResult);
+  };
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
             <View>
         <Button
           title="Välj produkt"
-          onPress={() => SetAddLengthsVisible(true)}
+          onPress={() => setAddLengthsVisible(true)}
         ></Button>
         <Modal visible={addLengthsVisible}>
          
@@ -28,7 +48,7 @@ const CutScreen = () => {
             name="close"
             size={24}
             color="black"
-            onPress={() => SetAddLengthsVisible(false)}
+            onPress={() => setAddLengthsVisible(false)}
           />
           </View>
         </Modal>
@@ -47,14 +67,28 @@ const CutScreen = () => {
             onPress={() => setAddCutItemsVisible(false)}
           />
           <View style={styles.modalView}>
-            <MeasurementInput />
+            <CutItemInput />
           </View>
         </Modal>
       </View>
 
       <CutList/>
       <Text> {selectedProduct?.type} {selectedProduct?.thickness}x{selectedProduct?.width}</Text>
+      <Button title="Gå vidare till inköpslista" onPress={handleGoToShoppingList}/>
+
+
+     <Text>
+  {cutItemsWithProduct.map((item, index) => (
+    <Text key={index}>
+      Measurement: {item.measurement}, Amount: {item.amount}, Product: {item.product.id} {item.product.thickness} {item.product.width}
+      {/* Lägg till fler egenskaper om det behövs */}
+      {index < cutItemsWithProduct.length - 1 && ", "}
+    </Text>
+  ))}
+</Text>
     </View>
+
+    
   );
 };
 
