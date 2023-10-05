@@ -29,6 +29,7 @@ const CutScreen = () => {
     }
 
     return cutItems.map((cutItem) => ({
+      
       measurement: cutItem.measurement,
       amount: cutItem.amount,
       product: selectedProduct,

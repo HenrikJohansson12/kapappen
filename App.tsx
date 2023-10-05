@@ -6,7 +6,6 @@ import RootTabsNavigator from "./navigators/RootTabsNavigator";
 import { CutItemProvider } from "./contexts/CutItemsContext";
 import { AvailableLengthsProvider } from "./contexts/AvailableLengthsContext";
 import { SelectedProductProvider } from "./contexts/SelectedProductContext";
-import * as SQLite from 'expo-sqlite';
 import { SQLiteDataProvider } from "./contexts/SqLiteDataContext";
 
 
