@@ -9,9 +9,9 @@ export default function CutList() {
   return (
     <View>
       {cutItems.map((item, index) => (
-        <Text style={styles.descriptionText}>
-          Mått: {item.measurement} mm Antal: {item.amount}{" "}
-        </Text>
+        <Text key={item.id || index} style={styles.descriptionText}>
+        Mått: {item.measurement} mm Antal: {item.amount}{" "}
+      </Text>
       ))}
     </View>
   );

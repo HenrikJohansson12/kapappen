@@ -53,12 +53,12 @@ export default function MeasurementInput() {
         onChangeText={setAmountInput}
         value={amountInput}
       />
-      <Button title="Add Cut Item" onPress={handleAddCutItem} />
+      <Button title="Lägg till" onPress={handleAddCutItem} />
       {cutItems.map((item, index) => (
         <View key={index}>
           <Text style={{color:'white'}}>
             Tillagt mått: {item.measurement} mm Antal: {item.amount}{" "}
-            <Button title="Remove item" onPress={() => handleRemoveCutItem(index)} />
+            <Button title="Ta bort" onPress={() => handleRemoveCutItem(index)} />
           </Text>
         </View>
       ))}

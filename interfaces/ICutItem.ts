@@ -1,4 +1,5 @@
 interface ICutItem {
+    id?:number
     measurement: number;
     amount: number;
  }
