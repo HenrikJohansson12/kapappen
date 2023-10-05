@@ -16,7 +16,7 @@ const ProductSelector = () => {
   const {selectedProduct,setSelectedProduct} = useSelectedProductContext();
   const [loading, setLoading] = useState(true);
   // Måste använda 10.0.2.2 för att emulatorn ska fungera
-  const url = "http://10.0.2.2:5298/Product";
+  const url = "http://192.168.255.239:5298/Product";
 
   useEffect(() => {
     setLoading(true);

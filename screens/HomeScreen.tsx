@@ -29,19 +29,19 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: '#222', // Mörkgrå bakgrundsfärg
+    backgroundColor: '#222', 
     paddingTop: 40,
   },
   welcomeText: {
-    fontSize: 42, // Större font size
-    color: 'white', // Vit textfärg
-    marginBottom: 10, // Avstånd nedåt från texten
+    fontSize: 42, 
+    color: 'white', 
+    marginBottom: 10, 
   },
   descriptionText: {
-    fontSize: 16, // Standard font size för beskrivningstexten
-    color: 'white', // Vit textfärg
-    textAlign: 'center', // Centrera texten
-    marginHorizontal: 20, // Vänster och höger marginal
+    fontSize: 16, 
+    color: 'white', 
+    textAlign: 'center', 
+    marginHorizontal: 20, 
   },
   descriptionContainer: {
     backgroundColor: '#333',
