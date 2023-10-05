@@ -55,7 +55,6 @@ const ShowSavedCutList: React.FC = () => {
     fetchData();
   }, [dataUpdated]);
   
-
   return (
     <View>
       <Text>Hämtade CutItemsWithProduct-data:</Text>

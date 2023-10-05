@@ -4,22 +4,26 @@ import { MaterialIcons } from "@expo/vector-icons";
 import CutList from "../components/CutList";
 import ProductSelector from "../components/ProductSelector";
 import { useSelectedProductContext } from "../contexts/SelectedProductContext";
-import CutItemInput from "../components/MeasurementInput";
+import MeasurementInput from "../components/MeasurementInput";
 import { useCutItemContext } from "../contexts/CutItemsContext";
-import * as SQLite from 'expo-sqlite';
+import * as SQLite from "expo-sqlite";
 import { useSQLiteData } from "../contexts/SqLiteDataContext";
 
 const CutScreen = () => {
   const [addCutItemsVisible, setAddCutItemsVisible] = useState(false);
-  const [addLengthsVisible, setAddLengthsVisible] = useState(false);
+  const [addLengthsVisible, setAddProductVisible] = useState(false);
   const { selectedProduct } = useSelectedProductContext();
   const { cutItems } = useCutItemContext();
-  const [cutItemsWithProduct, setCutItemsWithProduct] = useState<ICutItemWithProduct[]>([]);
+  const [cutItemsWithProduct, setCutItemsWithProduct] = useState<
+    ICutItemWithProduct[]
+  >([]);
   const { updateData } = useSQLiteData();
 
-  const db = SQLite.openDatabase('mydatabase.db');
+  const db = SQLite.openDatabase("mydatabase.db");
 
-  const combineCutItemsWithProduct = (cutItems: ICutItem[]): ICutItemWithProduct[] => {
+  const combineCutItemsWithProduct = (
+    cutItems: ICutItem[]
+  ): ICutItemWithProduct[] => {
     if (!selectedProduct) {
       return [];
     }
@@ -32,99 +36,121 @@ const CutScreen = () => {
   };
 
   const handleGoToShoppingList = async () => {
-    const cutItemsWithProductResult: ICutItemWithProduct[] = combineCutItemsWithProduct(cutItems);
+    const cutItemsWithProductResult: ICutItemWithProduct[] =
+      combineCutItemsWithProduct(cutItems);
     setCutItemsWithProduct(cutItemsWithProductResult);
 
     try {
       await db.transactionAsync(async (tx) => {
         await tx.executeSqlAsync(
-          'CREATE TABLE IF NOT EXISTS CutItemsWithProduct (id INTEGER PRIMARY KEY AUTOINCREMENT, measurement REAL, amount INTEGER, productId INTEGER, type TEXT, thickness REAL, width REAL)'
+          "CREATE TABLE IF NOT EXISTS CutItemsWithProduct (id INTEGER PRIMARY KEY AUTOINCREMENT, measurement REAL, amount INTEGER, productId INTEGER, type TEXT, thickness REAL, width REAL)"
         );
 
         for (const item of cutItemsWithProductResult) {
           const { measurement, amount, product } = item;
           await tx.executeSqlAsync(
-            'INSERT INTO CutItemsWithProduct (measurement, amount, productId, type, thickness, width) VALUES (?, ?, ?, ?, ?, ?)',
-            [measurement, amount, product.id, product.type, product.thickness, product.width]
+            "INSERT INTO CutItemsWithProduct (measurement, amount, productId, type, thickness, width) VALUES (?, ?, ?, ?, ?, ?)",
+            [
+              measurement,
+              amount,
+              product.id,
+              product.type,
+              product.thickness,
+              product.width,
+            ]
           );
         }
       });
       updateData();
     } catch (error) {
-      console.error('An error occurred:', error);
+      console.error("An error occurred:", error);
     }
   };
-  
-    
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-            <View>
+    <View style={styles.container}>
+      <View style={styles.descriptionContainer}>
+        <Text style={styles.descriptionText}>
+          Börja med att välja produkt och sen antal längder du behöver. 
+        </Text>
+      </View>
+      <View style={styles.buttonContainer}>
         <Button
           title="Välj produkt"
-          onPress={() => setAddLengthsVisible(true)}
+          onPress={() => setAddProductVisible(true)}
         ></Button>
         <Modal visible={addLengthsVisible}>
-         
           <View style={styles.modalView}>
-            <ProductSelector/>
-            <MaterialIcons
-            name="close"
-            size={24}
-            color="black"
-            onPress={() => setAddLengthsVisible(false)}
-          />
+            <ProductSelector />
+            <Button
+             title="        OK       "
+              onPress={() => setAddProductVisible(false)}
+            />
           </View>
         </Modal>
-      </View>
-      <View>
         <Button
           title="Lägg till dina mått"
           onPress={() => setAddCutItemsVisible(true)}
         />
         <Modal visible={addCutItemsVisible}>
-          <MaterialIcons
-            name="close"
-            size={24}
-            color="black"
-            onPress={() => setAddCutItemsVisible(false)}
-          />
           <View style={styles.modalView}>
-            <CutItemInput />
+            <MeasurementInput />
+            <Button
+            title="OK"
+            onPress={() => setAddCutItemsVisible(false)}
+            />
+            
           </View>
         </Modal>
       </View>
-
-      <CutList/>
-      <Text> {selectedProduct?.type} {selectedProduct?.thickness}x{selectedProduct?.width}</Text>
-      <Button title="Spara till inköpslista" onPress={handleGoToShoppingList}/>
-
-
-     <Text>
-  {cutItemsWithProduct.map((item, index) => (
-    <Text key={index}>
-      Measurement: {item.measurement}, Amount: {item.amount}, Product: {item.product.id} {item.product.thickness} {item.product.width}
-      {/* Lägg till fler egenskaper om det behövs */}
-      {index < cutItemsWithProduct.length - 1 && ", "}
-    </Text>
-  ))}
-</Text>
+      <View style={styles.descriptionContainer}>
+      <Text style={styles.selectedproducttext}>
+        Vald produkt:
+        {selectedProduct?.type} {selectedProduct?.thickness}x
+        {selectedProduct?.width} mm
+      </Text>
+      <CutList />
+      </View>
+      <Button title="Spara till inköpslista" onPress={handleGoToShoppingList} />
     </View>
-
-    
   );
 };
 
 const styles = StyleSheet.create({
-  centeredView: {
+
+  container: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
+    justifyContent: "flex-start",
+    backgroundColor: "#222", 
+    paddingTop: 40,
+  },
+  descriptionContainer: {
+    backgroundColor: '#333',
+    padding: 20,
+    borderRadius: 10,
+    margin: 10,
+    marginTop: 20,
+  },
+  selectedproducttext: {
+    fontSize: 20, // Större font size
+    color: 'white', // Vit textfärg
+   
+  },
+  descriptionText: {
+    fontSize: 16,
+    color: 'white', 
+    textAlign: 'center',
+    marginHorizontal: 20,
+  },
+  buttonContainer: {
+    flexDirection: 'column', // Lägger till en radlayout för knapparna
+    justifyContent: 'space-between', // Placerar knapparna med mellanrum
+    marginTop: 100
   },
   modalView: {
-    margin: 20,
-    backgroundColor: "white",
+    margin: 50,
+    backgroundColor: "#222",
     borderRadius: 20,
     padding: 35,
     alignItems: "center",

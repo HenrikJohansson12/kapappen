@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, TextInput, Button, Text } from "react-native";
 import { useCutItemContext } from "../contexts/CutItemsContext";
 
-export default function CutItemInput() {
+export default function MeasurementInput() {
   const [measurementInput, setMeasurementInput] = useState<string>("");
   const [amountInput, setAmountInput] = useState<string>("");
 
@@ -39,14 +39,16 @@ export default function CutItemInput() {
 
   return (
     <View>
-      <TextInput
-        placeholder="Enter measurement"
+      <TextInput style={{color: 'white'}}
+        placeholder="Lägg in längd i millimeter"
+        placeholderTextColor={'white'}
         keyboardType="numeric"
         onChangeText={setMeasurementInput}
         value={measurementInput}
       />
-      <TextInput
-        placeholder="Enter amount"
+      <TextInput style={{color: 'white'}}
+       placeholderTextColor={'white'}
+        placeholder="Lägg in antal längder"
         keyboardType="numeric"
         onChangeText={setAmountInput}
         value={amountInput}
@@ -54,8 +56,8 @@ export default function CutItemInput() {
       <Button title="Add Cut Item" onPress={handleAddCutItem} />
       {cutItems.map((item, index) => (
         <View key={index}>
-          <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-            Measurement: {item.measurement} Amount: {item.amount}{" "}
+          <Text style={{color:'white'}}>
+            Tillagt mått: {item.measurement} mm Antal: {item.amount}{" "}
             <Button title="Remove item" onPress={() => handleRemoveCutItem(index)} />
           </Text>
         </View>

@@ -39,7 +39,7 @@ const ProductSelector = () => {
   const renderItem = ({ item }: { item: Product }) => (
     <TouchableOpacity onPress={() => handleProductSelect(item)}>
       <View style={styles.item}>
-        <Text>{item.type} {item.thickness}x{item.width}</Text>
+        <Text style={styles.textstyle}>{item.type} {item.thickness}x{item.width} mm</Text>
      
       </View>
     </TouchableOpacity>
@@ -49,6 +49,7 @@ const ProductSelector = () => {
 
         <View>
           <FlatList
+            
             data={data}
             renderItem={renderItem}
             keyExtractor={(item) => item.id.toString()} // Använd id som nyckel
@@ -56,9 +57,9 @@ const ProductSelector = () => {
           {selectedProduct && (
             <View style={styles.selectedProduct}>
               <Text style={styles.selectedProductText}>Selected Product:</Text>
-              <Text>Type: {selectedProduct.type}</Text>
-              <Text>Thickness: {selectedProduct.thickness}mm</Text>
-              <Text>Width: {selectedProduct.width}mm</Text>
+              <Text style={styles.textstyle}>Type: {selectedProduct.type}</Text>
+              <Text style={styles.textstyle}>Thickness: {selectedProduct.thickness} mm</Text>
+              <Text style={styles.textstyle}>Width: {selectedProduct.width}mm</Text>
             </View>
           )}
         </View>
@@ -73,21 +74,29 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
   },
   item: {
-    backgroundColor: '#f9c2ff',
+    backgroundColor: '#333',
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
+   
+
   },
   selectedProduct: {
-    backgroundColor: '#e0e0e0',
+    backgroundColor: '#333',
     padding: 20,
     marginVertical: 16,
     marginHorizontal: 16,
+    
+   
   },
   selectedProductText: {
     fontSize: 20,
     fontWeight: 'bold',
+    color:'white',
   },
+textstyle:{
+color:'white',
+}
 });
 
 export default ProductSelector;

@@ -9,6 +9,8 @@ import { SelectedProductProvider } from "./contexts/SelectedProductContext";
 import * as SQLite from 'expo-sqlite';
 import { SQLiteDataProvider } from "./contexts/SqLiteDataContext";
 
+
+
 export default function App() {
   return (
     <SafeAreaProvider>

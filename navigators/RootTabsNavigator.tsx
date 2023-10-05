@@ -1,6 +1,5 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import React from "react";
 
@@ -10,7 +9,7 @@ import BuyScreen from "../screens/BuyScreen";
 
 export type RootTabsParamList = {
   HomeTab: undefined;
-  FavoritesTab: undefined;
+  AddItemsTab: undefined;
   Buytab:undefined
 };
 
@@ -35,12 +34,12 @@ export default function RootTabsNavigator() {
         }}
       />
       <Tabs.Screen
-        name="FavoritesTab"
+        name="AddItemsTab"
         component={CutScreen}
         options={{
-          title: "Kapa",
+          title: "Lägg till",
           tabBarIcon: (props) => (
-            <MaterialCommunityIcons name="hand-saw" size={24} color="black" />
+            <MaterialIcons name="add" size={24} color="black" />
           ),
         }}
       />
