@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import RootTabsNavigator from "./navigators/RootTabsNavigator";
 import { CutItemProvider } from "./contexts/CutItemsContext";
-import { AvailableLengthsProvider } from "./contexts/AvailableLengthsContext";
+
 import { SelectedProductProvider } from "./contexts/SelectedProductContext";
 import { SQLiteDataProvider } from "./contexts/SqLiteDataContext";
 
@@ -16,12 +16,10 @@ export default function App() {
       <NavigationContainer>
         <SQLiteDataProvider>
         <SelectedProductProvider>
-        <AvailableLengthsProvider>
         <CutItemProvider>
           <StatusBar style="auto" />
           <RootTabsNavigator />
           </CutItemProvider>
-          </AvailableLengthsProvider>
           </SelectedProductProvider>
           </SQLiteDataProvider>
       </NavigationContainer>

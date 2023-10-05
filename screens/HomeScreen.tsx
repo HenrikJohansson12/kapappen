@@ -16,8 +16,8 @@ export default function HomeScreen() {
       <MaterialCommunityIcons name="tape-measure" size={72} color="white" />
       <View style={styles.descriptionContainer}>
       <Text style={styles.descriptionText}>
-        Detta är appen som hjälper dig att räkna ut rätt antal brädor du behöver köpa till ditt byggprojekt.
-        Just nu har vi utbud från tre byggvaruhus i Borås men du kan också välja att mata in tillgängliga längder manuellt.    
+        Detta är appen som hjälper dig att skapa listor för dina mått till dina byggprojekt. 
+        Just nu har vi utbud från 3 byggvaruhus i Borås.    
       </Text>
       </View>
     </View>

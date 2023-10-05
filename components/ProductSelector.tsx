@@ -38,8 +38,8 @@ const ProductSelector = () => {
   const renderItem = ({ item }: { item: Product }) => (
     <TouchableOpacity onPress={() => handleProductSelect(item)}>
       <View style={styles.item}>
-        <Text style={styles.textstyle}>{item.type} {item.thickness}x{item.width} mm</Text>
-     
+        <Text style={styles.textstyle}>{item.type} {item.thickness}x{item.width} mm
+        </Text>  
       </View>
     </TouchableOpacity>
   );
