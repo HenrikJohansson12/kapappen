@@ -2,8 +2,8 @@ import React, { createContext, useContext, useState, ReactNode, Dispatch, SetSta
 
 // Skapa din context
 interface SelectedProductContextData {
-  selectedProduct: Product | null;
-  setSelectedProduct: Dispatch<SetStateAction<Product | null>>;
+  selectedProduct: IProduct | null;
+  setSelectedProduct: Dispatch<SetStateAction<IProduct | null>>;
 }
 
 export const SelectedProductContext = createContext<SelectedProductContextData | undefined>(undefined);
@@ -14,7 +14,7 @@ interface SelectedProductProviderProps {
 }
 
 export function SelectedProductProvider({ children }: SelectedProductProviderProps) {
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
 
   const contextValue: SelectedProductContextData = {
     selectedProduct,

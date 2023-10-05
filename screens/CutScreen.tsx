@@ -88,7 +88,7 @@ const CutScreen = () => {
               onPress={() => setAddProductVisible(false)}
             />
           </View>
-        </Modal>
+        </Modal >
         <Button
           title="Lägg till dina mått"
           onPress={() => setAddCutItemsVisible(true)}
@@ -97,7 +97,7 @@ const CutScreen = () => {
           <View style={styles.modalView}>
             <MeasurementInput />
             <Button
-            title="OK"
+             title="        OK       "
             onPress={() => setAddCutItemsVisible(false)}
             />
             
@@ -147,22 +147,15 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'column', // Lägger till en radlayout för knapparna
     justifyContent: 'space-between', // Placerar knapparna med mellanrum
-    marginTop: 100
+    marginTop: 100,
+    backgroundColor: "#222", 
   },
   modalView: {
-    margin: 50,
+    flex:1,
     backgroundColor: "#222",
-    borderRadius: 20,
-    padding: 35,
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    justifyContent:"space-evenly"
+
   },
   button: {
     borderRadius: 20,

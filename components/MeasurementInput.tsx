@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, TextInput, Button, Text } from "react-native";
+import { View, TextInput, Button, Text,StyleSheet } from "react-native";
 import { useCutItemContext } from "../contexts/CutItemsContext";
 
 export default function MeasurementInput() {
@@ -65,3 +65,4 @@ export default function MeasurementInput() {
     </View>
   );
 }
+

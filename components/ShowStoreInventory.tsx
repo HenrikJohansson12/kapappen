@@ -11,7 +11,7 @@ import { useSelectedProductContext } from "../contexts/SelectedProductContext";
 
 
 const ShowStoreInventory = () => {
-  const [data, setData] = useState<Product[]>([]);
+  const [data, setData] = useState<IProduct[]>([]);
   const {selectedProduct,setSelectedProduct} = useSelectedProductContext();
   const [loading, setLoading] = useState(true);
   // Måste använda 10.0.2.2 för att emulatorn ska fungera
@@ -31,11 +31,11 @@ const ShowStoreInventory = () => {
       });
   }, []);
 
-  const handleProductSelect = (product: Product) => {
+  const handleProductSelect = (product: IProduct) => {
     setSelectedProduct(product);
   };
 
-  const renderItem = ({ item }: { item: Product }) => (
+  const renderItem = ({ item }: { item: IProduct }) => (
     <TouchableOpacity onPress={() => handleProductSelect(item)}>
       <View style={styles.item}>
         <Text style={styles.textstyle}>{item.type} {item.thickness}x{item.width} mm</Text>

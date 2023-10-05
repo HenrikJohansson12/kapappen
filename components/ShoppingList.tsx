@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
-
+//Används inte. 
 export default function ShoppingList({ productId }: { productId: number }) {
   const [storeInventory, setStoreInventory] = useState<IStoreInventory[]>([]);
   const [stores, setStores] = useState<IStore[]>([]);
@@ -10,7 +10,6 @@ export default function ShoppingList({ productId }: { productId: number }) {
   const urlStore = `http://192.168.255.239:5298/Store/`;
 
   useEffect(() => {
-    // Anrop för att hämta store inventory
     fetch(urlInventory)
       .then((response) => response.json())
       .then((data: IStoreInventory[]) => {

@@ -6,11 +6,13 @@ import React from "react";
 import HomeStackNavigator from "./HomeStackNavigator";
 import CutScreen from "../screens/CutScreen";
 import BuyScreen from "../screens/BuyScreen";
+import MapScreen from "../screens/MapScreen";
 
 export type RootTabsParamList = {
   HomeTab: undefined;
   AddItemsTab: undefined;
   Buytab:undefined
+  MapTab: undefined
 };
 
 const Tabs = createBottomTabNavigator<RootTabsParamList>();
@@ -48,12 +50,24 @@ export default function RootTabsNavigator() {
         name="Buytab"
         component={BuyScreen}
         options={{
-          title: "Kapa",
+          title: "Köplista",
           tabBarIcon: (props) => (
             <FontAwesome name="shopping-cart" size={24} color="black" />
           ),
         }}
       />
+        <Tabs.Screen
+        name="MapTab"
+        component={MapScreen}
+        options={{
+          title: "Karta",
+          tabBarIcon: (props) => (
+            <MaterialIcons name="map" size={24} color="black" />
+          ),
+        }}
+      />
     </Tabs.Navigator>
+
+    
   );
 }

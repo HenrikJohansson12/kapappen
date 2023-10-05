@@ -4,7 +4,7 @@ import ShowSavedCutList from '../components/ShowSavedCutLists';
 import MapView, { Region } from 'react-native-maps';
 import * as Location from 'expo-location';
 import ShoppingList from '../components/ShoppingList';
-import ShowMap from '../components/ShowMap';
+
 
 const BuyScreen: React.FC = () => {
  
@@ -12,11 +12,6 @@ const BuyScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <ShowSavedCutList />
-     
-
-      <View style={styles.mapContainer}>
-      <ShowMap/>
-        </View>
     </View>
   );
 };
