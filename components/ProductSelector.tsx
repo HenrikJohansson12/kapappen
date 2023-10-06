@@ -8,14 +8,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useSelectedProductContext } from "../contexts/SelectedProductContext";
-
+import { API_BASE_URL } from "../apistring";
 
 const ProductSelector = () => {
   const [data, setData] = useState<IProduct[]>([]);
   const {selectedProduct,setSelectedProduct} = useSelectedProductContext();
   const [loading, setLoading] = useState(true);
   // Måste använda 10.0.2.2 för att emulatorn ska fungera
-  const url = "http://192.168.255.239:5298/Product";
+  const url = `${API_BASE_URL}Product`
 
   useEffect(() => {
     setLoading(true);

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, Text,StyleSheet } from "react-native";
 import { useCutItemContext } from "../contexts/CutItemsContext";
-
+//Komponent för inmatning av längder. 
 export default function MeasurementInput() {
   const [measurementInput, setMeasurementInput] = useState<string>("");
   const [amountInput, setAmountInput] = useState<string>("");
@@ -33,7 +33,7 @@ export default function MeasurementInput() {
       setAmountInput("");
     } else {
       // Visa felmeddelande om inmatningen är ogiltig
-      alert("Invalid input. Please enter valid numbers greater than 0.");
+      alert("Måttet måste vara större än noll");
     }
   };
 

@@ -9,12 +9,13 @@ import {
 } from 'react-native';
 import { useSelectedProductContext } from "../contexts/SelectedProductContext";
 
-
+//Används ej. 
 const ShowStoreInventory = () => {
   const [data, setData] = useState<IProduct[]>([]);
   const {selectedProduct,setSelectedProduct} = useSelectedProductContext();
   const [loading, setLoading] = useState(true);
   // Måste använda 10.0.2.2 för att emulatorn ska fungera
+  
   const url = "http://192.168.255.239:5298/Product";
 
   useEffect(() => {

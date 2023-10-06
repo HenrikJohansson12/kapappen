@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import ShowSavedCutList from '../components/ShowSavedCutLists';
 import MapView, { Region,Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
-import ShoppingList from '../components/ShoppingList';
-
+import { API_BASE_URL } from "../apistring";
 const MapScreen: React.FC = () => {
  
     const [mapInitialized, setMapInitialized] = useState(false);
     const [initialRegion, setInitialRegion] = useState<Region | undefined>(undefined);
     const [stores, setStores] = useState<IStore[]>([]);
 
-    const urlStore = `http://192.168.255.239:5298/Store/`;
+    const urlStore = `${API_BASE_URL}Store`;
     //Hämta listan med butiker. 
     useEffect(() => {
         fetch(urlStore)

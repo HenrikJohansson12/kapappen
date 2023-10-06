@@ -22,12 +22,12 @@ const ShowSavedCutList: React.FC = () => {
 
           const cutItemsWithProduct: ICutItemWithProduct[] = [];
 
-          // Convert ResultSet to an array of objects
+      
           const rows = Array.from(result.rows);
 
           for (let i = 0; i < rows.length; i++) {
             const row = rows[i];
-
+            //Mappa resultatet
             const cutItemWithProduct: ICutItemWithProduct = {
               id: row.id,
               measurement: row.measurement,

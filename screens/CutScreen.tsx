@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Modal, StyleSheet, Button } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
 import CutList from "../components/CutList";
 import ProductSelector from "../components/ProductSelector";
 import { useSelectedProductContext } from "../contexts/SelectedProductContext";
@@ -134,8 +133,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   selectedproducttext: {
-    fontSize: 20, // Större font size
-    color: 'white', // Vit textfärg
+    fontSize: 20, 
+    color: 'white', 
    
   },
   descriptionText: {
@@ -145,8 +144,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   buttonContainer: {
-    flexDirection: 'column', // Lägger till en radlayout för knapparna
-    justifyContent: 'space-between', // Placerar knapparna med mellanrum
+    flexDirection: 'column', 
+    justifyContent: 'space-between', 
     marginTop: 100,
     backgroundColor: "#222", 
   },

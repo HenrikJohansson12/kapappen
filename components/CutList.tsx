@@ -1,8 +1,7 @@
 import React from "react";
-import { View, Text,StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { useCutItemContext } from "../contexts/CutItemsContext";
-
-
+//Visar en lista på tillagda längder i contexten. 
 export default function CutList() {
   const { cutItems } = useCutItemContext();
 
@@ -10,8 +9,8 @@ export default function CutList() {
     <View>
       {cutItems.map((item, index) => (
         <Text key={item.id || index} style={styles.descriptionText}>
-        Mått: {item.measurement} mm Antal: {item.amount}{" "}
-      </Text>
+          Mått: {item.measurement} mm Antal: {item.amount}{" "}
+        </Text>
       ))}
     </View>
   );
@@ -19,24 +18,24 @@ export default function CutList() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    backgroundColor: '#222', 
+    alignItems: "center",
+    justifyContent: "flex-start",
+    backgroundColor: "#222",
     paddingTop: 40,
   },
   welcomeText: {
     fontSize: 42,
-    color: 'white',
-    marginBottom: 10
+    color: "white",
+    marginBottom: 10,
   },
   descriptionText: {
-    fontSize: 16, 
-    color: 'white', 
-    textAlign: 'center',
-    marginHorizontal: 20, 
+    fontSize: 16,
+    color: "white",
+    textAlign: "center",
+    marginHorizontal: 20,
   },
   descriptionContainer: {
-    backgroundColor: '#333',
+    backgroundColor: "#333",
     padding: 20,
     borderRadius: 10,
     margin: 10,

@@ -1,4 +1,4 @@
-// SQLiteDataContext.tsx
+//Behövde en context som håller reda på när något skrivs till databasen. 
 import React, { createContext, useContext, useState } from 'react';
 
 interface SQLiteDataContextProps {

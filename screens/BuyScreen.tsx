@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import ShowSavedCutList from '../components/ShowSavedCutLists';
-import MapView, { Region } from 'react-native-maps';
-import * as Location from 'expo-location';
-import ShoppingList from '../components/ShoppingList';
 
 
 const BuyScreen: React.FC = () => {
