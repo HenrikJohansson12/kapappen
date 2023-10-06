@@ -24,13 +24,23 @@ komponenter.
  - [x]De utvalda komponenterna MÅSTE antecknas i README filen tillsammans med en lista över genomförda krav.
  - [x]React Navigation används för att skapa en bättre upplevelse i appen.
  - [x]Git & GitHub har använts
-- [x]Projektmappen innehåller en README.md fil -
-- [x]Uppgiften lämnas in i tid!
-Muntlig presentation är genomförd
+ - [x]Projektmappen innehåller en README.md fil -
+ - [x]Uppgiften lämnas in i tid!
+ - [x]Muntlig presentation är genomförd
 
 
 Krav för väl godkänt:
-1. Alla punkter för godkänt är uppfyllda
-2. Ytterligare en valfri extern modul används i projektet.
-3. Appen ska prata med ett Web-API för att hämta data.
-4. Appen ska laseras på en Appstore (Deadline samma dag som kursen slutar)
+- [x] Alla punkter för godkänt är uppfyllda
+- [?] Ytterligare en valfri extern modul används i projektet.
+- [x] Appen ska prata med ett Web-API för att hämta data.
+- [] Appen ska laseras på en Appstore (Deadline samma dag som kursen slutar)
+
+
+Instruktioner och commandon. 
+
+- npm install
+-npm start 
+
+Repo till Rest-apiet
+https://github.com/HenrikJohansson12/kapappen-api 
+
